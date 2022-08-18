@@ -9,6 +9,7 @@ use App\Models\User;
 class AuthMutations
 {   
     public function __construct(){}
+
     public function signUp($_, array $args){
         if($args['password'] !== $args["password_confirmation"] ){
             throw new Error("password doesn't match");
@@ -21,9 +22,25 @@ class AuthMutations
         $user = User::create([
             "name" =>  $args["name"],
             "email" => $args["email"],
+            "phone_number" => $args["phone_number"],
             "password" => $password
         ]);
         $access_token = $user->createToken('authToken')->accessToken;
         return ["user" => $user, "token" => $access_token];
+    }
+
+    public function logIn($_, array $args){
+        $user = User::where("email", $args["email"])
+                    ->first();
+        if($user){
+            if(Hash::check($args["password"], $user->password)){
+                $token = $user->createToken('authToken')->accessToken;
+                return [
+                    "user" => $user,
+                    "token" => $token
+                ];
+            }
+        }           
+        throw new Error("Wrong email or password!");
     }
 }

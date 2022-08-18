@@ -2,13 +2,12 @@ extend type Mutation {
  sign_up(input: SignUpInput @spread): Auth @field(
       resolver: "App\\GraphQL\\Mutations\\AuthMutations@signUp"
     )
-}
 
-extend type Query { 
- log_in(input: LogInInput @spread): Auth @field(
-      resolver: "App\\GraphQL\\Queries\\AuthQueries@logIn"
+    log_in(input: LogInInput @spread): Auth @field(
+      resolver: "App\\GraphQL\\Mutations\\AuthMutations@logIn"
     )
 }
+
 type Auth{
     user: User!
     token: String!
@@ -18,6 +17,7 @@ input SignUpInput{
     name: String!
     email: String!
     password: String!
+    phone_number: String!
     password_confirmation: String!
 }
 input LogInInput{
