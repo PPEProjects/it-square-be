@@ -20,14 +20,13 @@ class CreateProjectsTable extends Migration
             $table->mediumText('description')->nullable();
             $table->string('category');
             $table->string('status');
-            $table->dateTime('time_to_do');
-            $table->string('programing_language');
-            $table->string('framework');
+            $table->json('time_to_do');
+            $table->json('skill');
+            $table->text("information")->nullable();
             $table->string('level')->nullable();
             $table->string('version')->nullable();
             $table->string('budget')->nullable();
-            $table->string('salary')->nullable();
-            $table->string('privacy');
+            $table->boolean('is_privacy')->default(false);
             $table->json('attachments');
             $table->timestamps();
             $table->softDeletes();

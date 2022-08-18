@@ -1,0 +1,95 @@
+
+extend type Mutation  {
+  upsert_project(input: UpsertProject! @spread): Project
+     @guard
+      @field(
+      resolver: "App\\GraphQL\\Mutations\\ProjectMutations@upsertProject"
+    )
+
+}
+
+extend type Query  {
+  list_projects(filter: FilterProject @spread): [Project]
+     @guard
+      @field(
+      resolver: "App\\GraphQL\\Queries\\ProjectQueries@listProject"
+    )
+
+}
+type Project {
+    id: ID!
+    name: String!
+    user: User!
+    description: String!
+    category: String!
+    status: String!
+    time_to_do: TimeToDo
+    skill: JSON!
+    level: String
+    version: String
+    budget: String
+    information: String
+    is_privacy: Boolean!
+    attachments: Attachments!
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+input UpsertProject {
+    id: ID
+    name: String!
+    description: String!
+    category: String
+    status: Status!
+    time_to_do: TimeToDoInput
+
+    "Example: ['php', 'typescript', 'laravel', 'react']"
+    skill: JSON
+
+    information: String
+    level: String
+    version: String
+    budget: String
+    is_privacy: Boolean
+    attachments: AttachmentInput
+}
+
+enum Status {
+  draff_project
+  project
+  on_board
+  running
+  stuck
+  done
+  in_use
+}
+
+input FilterProject{
+    name: String
+    status: Status
+    category: String
+    
+    "Example: ['php', 'typescript', 'laravel', 'react']"
+    skill: JSON
+}
+
+input AttachmentInput{
+   main_pictures: JSON!
+   other_files: JSON
+}
+
+type Attachments{
+   main_pictures: JSON!
+   other_files: JSON
+}
+
+"A date string with format `Y-m-d`, e.g. `2011-05-23`."  
+input TimeToDoInput{
+ from: String!
+ to: String!
+}
+
+type TimeToDo{
+ from: String!
+ to: String!
+}
