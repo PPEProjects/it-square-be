@@ -10,19 +10,19 @@ extend type Query {
     )
 }
 type Auth{
-    user: User
-    token: String
+    user: User!
+    token: String!
 }
 
 input SignUpInput{
-    name: String
-    email: String
-    password: String
-    password_confirmation: String
+    name: String!
+    email: String!
+    password: String!
+    password_confirmation: String!
 }
 input LogInInput{
     "your email"
-    email: String
+    email: String!
     "your password"
-    password: String
+    password: String!
 }
