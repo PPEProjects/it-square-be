@@ -1,0 +1,37 @@
+
+extend type Mutation  {
+  upsert_user_advance(input: UpsertUserAdvance! @spread): UserAdvance
+     @guard
+      @field(
+      resolver: "App\\GraphQL\\Mutations\\UserAdvanceMutations@upsertUserAdvance"
+    )
+
+   delete_user_advance(user_id: ID! @spread): JSON
+     @guard
+      @field(
+      resolver: "App\\GraphQL\\Mutations\\UserAdvanceMutations@deleteUserAdvance"
+    )
+}
+
+
+type UserAdvance {
+    id: ID!
+    user: User!
+    language: String!
+    info: String!
+    plan: String!
+    skill: JSON!
+    goal: String!
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+input UpsertUserAdvance {
+    language: String!
+    info: String!
+    plan: String!
+    goal: String!
+    "Example: ['php', 'typescript', 'laravel', 'react']"
+    skill: JSON!
+}
+

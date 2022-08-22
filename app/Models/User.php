@@ -23,6 +23,10 @@ class User extends Authenticatable
         'email',
         'phone_number',
         'password',
+        'avatar',
+        'banner',
+        'first_name',
+        'is_flag',
     ];
 
     /**
@@ -42,5 +46,10 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+    ];
+
+    protected  $attributes = [
+        'avatar' => 'https://i.imgur.com/jfZDmVD.png',
+        'banner' => 'https://i.imgur.com/TGrWoue.jpg'
     ];
 }

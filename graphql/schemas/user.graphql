@@ -37,6 +37,10 @@ type User {
 
     "Unique phone number address."
     phone_number: String!
+
+    avatar: String!
+    banner: String!
+    
     "When the email was verified."
     email_verified_at: DateTime
 
