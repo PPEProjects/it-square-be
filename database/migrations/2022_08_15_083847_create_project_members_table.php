@@ -17,11 +17,11 @@ class CreateProjectMembersTable extends Migration
             $table->id();
             $table->unsignedBigInteger("user_id")->nullable();
             $table->unsignedBigInteger('project_id');
-            $table->unsignedBigInteger('user_id_assign');
+            $table->unsignedBigInteger('user_assign_id')->nullable();
             $table->string('position');
-            $table->string('salary');
-            $table->dateTime('fee');
+            $table->string('salary')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
